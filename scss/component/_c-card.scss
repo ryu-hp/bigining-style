@@ -82,7 +82,15 @@ $card-footer-border-color: #e1e1e1;
 
 // カードのスタイル
 $card-image-zoom-enabled: true;  // 画像ズームアップ機能のオンオフ切り替え
+.card-link {
+  text-decoration: none;
+  color: inherit;  // カード内のテキストの色を変更しない
+  display: block;  // カード全体をクリック可能にする
 
+  &:hover {
+    text-decoration: none;  // ホバー時の下線を消す
+  }
+}
 .card {
   display: flex;
   flex-direction: column;
