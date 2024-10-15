@@ -1,0 +1,142 @@
+@use "../global" as *;
+// =========================================================
+//  module - card
+// =========================================================
+
+// .card-#{$name} {
+//     .__primary {
+//         .___2 {
+//         }
+//     }
+// }
+
+// Sass変数を定義
+$card-bg: #fff;
+$card-border-width: 1px;
+$card-border-color: #dde;
+$card-border-radius: 0.25rem;
+$card-box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+$card-padding-top: 1rem;
+$card-padding-lr: 1rem;
+$card-padding-bottom: 1rem;
+
+$card-header-bg: #f7f7f7;
+$card-header-padding-top: 0.75rem;
+$card-header-padding-lr: 1rem;
+$card-header-padding-bottom: 0.75rem;
+$card-header-font-size: 1.25rem;
+$card-header-text-color: #333;
+$card-header-border-width: 1px;
+$card-header-border-color: #e1e1e1;
+
+$card-body-padding-top: 1rem;
+$card-body-padding-lr: 1rem;
+$card-body-padding-bottom: 1rem;
+$card-body-font-size: 1rem;
+$card-body-text-color: #555;
+
+$card-footer-bg: #f7f7f7;
+$card-footer-padding-top: 0.75rem;
+$card-footer-padding-lr: 1rem;
+$card-footer-padding-bottom: 0.75rem;
+$card-footer-font-size: 1rem;
+$card-footer-text-color: #333;
+$card-footer-border-width: 1px;
+$card-footer-border-color: #e1e1e1;
+
+// CSSカスタムプロパティを :root に適用
+:root {
+  --card-bg: #{$card-bg};
+  --card-border-width: #{$card-border-width};
+  --card-border-color: #{$card-border-color};
+  --card-border-radius: #{$card-border-radius};
+  --card-box-shadow: #{$card-box-shadow};
+  --card-padding-top: #{$card-padding-top};
+  --card-padding-lr: #{$card-padding-lr};
+  --card-padding-bottom: #{$card-padding-bottom};
+
+  --card-header-bg: #{$card-header-bg};
+  --card-header-padding-top: #{$card-header-padding-top};
+  --card-header-padding-lr: #{$card-header-padding-lr};
+  --card-header-padding-bottom: #{$card-header-padding-bottom};
+  --card-header-font-size: #{$card-header-font-size};
+  --card-header-text-color: #{$card-header-text-color};
+  --card-header-border-width: #{$card-header-border-width};
+  --card-header-border-color: #{$card-header-border-color};
+
+  --card-body-padding-top: #{$card-body-padding-top};
+  --card-body-padding-lr: #{$card-body-padding-lr};
+  --card-body-padding-bottom: #{$card-body-padding-bottom};
+  --card-body-font-size: #{$card-body-font-size};
+  --card-body-text-color: #{$card-body-text-color};
+
+  --card-footer-bg: #{$card-footer-bg};
+  --card-footer-padding-top: #{$card-footer-padding-top};
+  --card-footer-padding-lr: #{$card-footer-padding-lr};
+  --card-footer-padding-bottom: #{$card-footer-padding-bottom};
+  --card-footer-font-size: #{$card-footer-font-size};
+  --card-footer-text-color: #{$card-footer-text-color};
+  --card-footer-border-width: #{$card-footer-border-width};
+  --card-footer-border-color: #{$card-footer-border-color};
+}
+
+// カードのスタイル
+$card-image-zoom-enabled: true;  // 画像ズームアップ機能のオンオフ切り替え
+.card-link {
+  text-decoration: none;
+  color: inherit;  // カード内のテキストの色を変更しない
+  display: block;  // カード全体をクリック可能にする
+
+  &:hover {
+    text-decoration: none;  // ホバー時の下線を消す
+  }
+}
+.card {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--card-bg);  // カードの背景色
+  border: var(--card-border-width) solid var(--card-border-color);  // カードの境界線
+  border-radius: var(--card-border-radius);  // カードの角を丸める
+  box-shadow: var(--card-box-shadow);  // カードに影をつける
+  padding: var(--card-padding-top) var(--card-padding-lr) var(--card-padding-bottom);  // カードの内側余白
+
+  &-header {
+    background-color: var(--card-header-bg);  // ヘッダーの背景色
+    padding: var(--card-header-padding-top) var(--card-header-padding-lr) var(--card-header-padding-bottom);  // ヘッダーの内側余白
+    font-size: var(--card-header-font-size);  // ヘッダーのフォントサイズ
+    color: var(--card-header-text-color);  // ヘッダーの文字色
+    border-bottom: var(--card-header-border-width) solid var(--card-header-border-color);  // ヘッダーの下にボーダーを追加
+    order: $card-header-order;  // ヘッダーの順序（動的に変更）
+  }
+
+  &-image {
+    width: 100%;  // 画像の幅をカードに合わせる
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;  // 画像の変化アニメーション
+    order: $card-image-order;  // 画像の順序（動的に変更）
+
+    @if $card-image-zoom-enabled {
+      // ホバー時に画像を拡大する効果
+      &:hover {
+        transform: scale(1.1);  // 画像を拡大
+        opacity: 0.8;  // 画像の透明度を少し下げる
+      }
+    }
+  }
+
+  &-body {
+    flex-grow: 1;
+    padding: var(--card-body-padding-top) var(--card-body-padding-lr) var(--card-body-padding-bottom);  // ボディの内側余白
+    font-size: var(--card-body-font-size);  // ボディのフォントサイズ
+    color: var(--card-body-text-color);  // ボディの文字色
+    order: $card-body-order;  // ボディの順序（動的に変更）
+  }
+
+  &-footer {
+    background-color: var(--card-footer-bg);  // フッターの背景色
+    padding: var(--card-footer-padding-top) var(--card-footer-padding-lr) var(--card-footer-padding-bottom);  // フッターの内側余白 
+    font-size: var(--card-footer-font-size);  // フッターのフォントサイズ
+    color: var(--card-footer-text-color);  // フッターの文字色
+    border-top: var(--card-footer-border-width) solid var(--card-footer-border-color);  // フッターの上にボーダーを追加
+    order: $card-footer-order;  // フッターの順序（動的に変更）
+  }
+}

@@ -21,8 +21,16 @@ $gray-steps: 8;
     } @else if $index == $half-steps {
         @return $color;
     } @else if $index < $half-steps {
-        $ratio: $index / $half-steps;
-        @return mix(white, $color, $ratio-max - $ratio * 100%);
+        $ratio: calc($index / $half-steps);
+        $weight: $ratio-max - $ratio * 100%;
+        @if $weight < 0% {
+        $weight: 0%;
+        }
+        @if $weight > 100% {
+        $weight: 100%;
+        }
+
+        @return mix(white, $color, $weight);
     } @else {
         $ratio: ($index - $half-steps) / $half-steps;
         @return mix($color, black, $ratio-max - $ratio * 100%);
@@ -38,7 +46,7 @@ $gray-steps: 8;
     } @else if $index == $half-steps {
         @return $base;
     } @else if $index < $half-steps {
-        $ratio: $index / $half-steps;
+        $ratio: math.div($index, $half-steps);
         @return mix($base, white, $ratio * 100%);
     } @else {
         $ratio: ($index - $half-steps) / $half-steps;
