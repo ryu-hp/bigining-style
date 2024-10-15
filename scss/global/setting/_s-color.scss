@@ -1,0 +1,158 @@
+// Color
+
+$primary-colors: (
+    1: #6aafbe,
+    2: #ccf0e7,
+    3: #e0f6ff,
+    4: #111
+);
+$primary-steps: 10;
+
+$base-gray: #252b34;
+$gray-steps: 8;
+
+@function calculate-primary-color($color, $index, $steps) {
+    $half-steps: ($steps - 1) / 2;
+    $ratio-max: 65%;
+    @if $index == 0 {
+        @return mix(white, $color, $ratio-max);
+    } @else if ($index == $steps - 1) {
+        @return mix($color, black, $ratio-max);
+    } @else if $index == $half-steps {
+        @return $color;
+    } @else if $index < $half-steps {
+        $ratio: $index / $half-steps;
+        @return mix(white, $color, $ratio-max - $ratio * 100%);
+    } @else {
+        $ratio: ($index - $half-steps) / $half-steps;
+        @return mix($color, black, $ratio-max - $ratio * 100%);
+    }
+}
+
+@function calculate-gray($base, $index, $steps) {
+    $half-steps: ($steps - 1) / 2;
+    @if $index == 0 {
+        @return white;
+    } @else if ($index == $steps - 1) {
+        @return black;
+    } @else if $index == $half-steps {
+        @return $base;
+    } @else if $index < $half-steps {
+        $ratio: $index / $half-steps;
+        @return mix($base, white, $ratio * 100%);
+    } @else {
+        $ratio: ($index - $half-steps) / $half-steps;
+        @return mix(black, $base, $ratio * 100%);
+    }
+}
+
+:root {
+    // Primary color steps
+    @each $key, $primary in $primary-colors {
+        @for $j from 0 through $primary-steps - 1 {
+            $gray-value: calculate-primary-color($primary, $j, $primary-steps);
+            $gray-name: 100 * ($j + 1);
+            --primary-#{$key}-#{$gray-name}: #{$gray-value};
+        }
+    }
+
+    // Base gray steps
+    @for $i from 0 through ($gray-steps - 1) {
+        $gray-value: calculate-gray($base-gray, $i, $gray-steps);
+        $gray-name: 100 * $i;
+        --gray-#{$gray-name}: #{$gray-value};
+    }
+}
+
+// Color
+$base-gray: #64748b;
+$primary1: #a6ff00;
+$primary2: #2d81ff;
+$primary3: #e0f6ff;
+$primary4: #111;
+$primary5: #f3faff;
+$primary6: #d0e5ee;
+
+// Highlight
+$highlight-blue: #01b9f2;
+$highlight-red: #bf2840;
+$highlight-green: #a6ff00;
+
+// Link
+$link: #111;
+$hyperlink: #49729b;
+
+// OLD =============================
+
+// Secondary Color
+$blue: #01b9f2;
+$red: #bf2840;
+$green: #a6ff00;
+
+// Fixed
+$black: #111;
+$white: #fff;
+
+// background
+$whiteBG: rgb(255, 255, 255 / 0.9);
+
+// Mono Color
+$gray1: #444;
+$gray2: #777;
+$gray3: #ccc;
+$gray4: #f8f8f8;
+
+// Shadow
+$shadow: #efeeea;
+
+// Link
+$linktext: #111;
+$hyperlink: #49729b;
+
+$base-gray: #0f172a;
+$gray-steps: 11; // グレースケールの段階数（例: 50, 100, 200, ... 950）
+
+$theme-colors: (
+    // Primary Color
+    primary1: $primary1,
+    primary2: $primary2,
+    primary3: $primary3,
+    primary4: $primary4,
+    primary5: $primary5,
+    primary6: $primary6,
+
+    // Secondary Color
+    blue: $blue,
+    red: $red,
+
+    // Fixed
+    black: $black,
+    white: $white,
+
+    // Mono Color
+    gray1: $gray1,
+    gray2: $gray2,
+    gray3: $gray3,
+    gray4: $gray4,
+
+    // Shadow
+    shadow: $shadow,
+
+    linktext: $linktext,
+    hyperlink: $hyperlink
+);
+
+$font: "font";
+$background: "background";
+$border: "border";
+@each $class, $styleColor in $theme-colors {
+    .#{$font}-#{$class} {
+        color: $styleColor !important;
+    }
+    .#{$background}-#{$class} {
+        background-color: $styleColor !important;
+    }
+    .#{$border}-#{$class} {
+        border-color: $styleColor !important;
+    }
+}

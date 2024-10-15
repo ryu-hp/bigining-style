@@ -1,0 +1,42 @@
+header {
+  z-index: 100;
+  width: 100%;
+}
+
+.header {
+  display: grid;
+  // place-content: center;
+}
+
+.site-logo {
+  fill: #fff;
+  width: clamp(120px, 20vw, 210px);
+}
+
+#loader-bg {
+  display: block;
+  position: fixed;
+  width: 100vw !important;
+  height: 100vh !important;
+  inset: 0;
+  text-align: center;
+  background: linear-gradient(var(--primary-1-100), var(--primary-1-200));
+  z-index: 1050;
+}
+
+#loader {
+  --white: #fff;
+  display: block;
+  position: fixed;
+  margin-inline: auto;
+  inset: 0;
+  text-align: center;
+  color: linear-gradient(var(--white), var(--primary-1-300));
+  z-index: 2;
+  /* background: #eeeeef; */
+  /* z-index: -1; */
+}
+
+.loading-area {
+  fill: linear-gradient(var(--white), var(--primary-1-300));
+}

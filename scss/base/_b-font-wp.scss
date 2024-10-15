@@ -1,0 +1,309 @@
+@use "../global" as *;
+
+$min-viewport: map-get($breakpoints, sm); //480
+$max-viewport: map-get($breakpoints, xxl); //1366
+$viewport-difference: $max-viewport - $min-viewport;
+
+$font-ratio: 0.625;
+$base-font-size: 1rem;
+$base-line-height: 1.5;
+$base-letter-spacing: 0.05em;
+$head: ".h";
+$paragraph: ".p";
+
+$viewport_difference: $max_viewport - $min_viewport;
+
+// Font-family-JP
+$font-family-h-jp-serif: "source-han-sans-japanese", sans-serif;
+$font-family-h-jp-sans: "source-han-sans-japanese", sans-serif;
+$font-family-p-jp-sans: "source-han-sans-japanese", sans-serif;
+
+$max-font-size: 4.8rem;
+$min-font-size: 2.6rem;
+
+$transition-speed: 0.3s;
+
+.text-scale {
+    --text-size-80: #{$font-ratio * 0.8 * $base-font-size};
+    --text-size-90: #{$font-ratio * 0.9 * $base-font-size};
+    --text-size-100: #{$font-ratio * 1 * $base-font-size};
+    --text-size-200: #{$font-ratio * 2 * $base-font-size};
+    --text-size-300: #{$font-ratio * 2.85 * $base-font-size};
+    --text-size-400: #{$font-ratio * 3.79 * $base-font-size};
+    --text-size-500: #{$font-ratio * 5.05 * $base-font-size};
+    --text-size-600: #{$font-ratio * 6.73 * $base-font-size};
+    --text-size-700: #{$font-ratio * 8.98 * $base-font-size};
+}
+
+:root {
+    --min-viewport: #{$min-viewport};
+    --max-viewport: #{$max-viewport};
+    --viewport-difference: #{$viewport-difference};
+    --font-family-jp: #{$font-family-h-jp-serif};
+    --font-family-h-jp-sans: #{$font-family-h-jp-sans};
+    --font-family-p-jp-sans: #{$font-family-p-jp-sans};
+    --font-ratio: #{$font-ratio};
+    --base-font-size: #{$base-font-size};
+    --base-line-height: #{$base-line-height};
+    --base-letter-spacing: #{$base-letter-spacing};
+    --transition-base-speed: #{$transition-speed};
+}
+
+$transition-base: ease-in-out var($transition-speed) !default;
+$transition-fade: opacity var($transition-speed) linear !default;
+$transition-collapse-width: width var($transition-speed) ease !default;
+$transition-collapse-height: height var($transition-speed) ease !default;
+
+.collapse-vertical {
+    &:not(.show) {
+        display: none;
+    }
+}
+
+.collapsing {
+    height: 0;
+    overflow: hidden;
+    @include transition($transition-collapse-height);
+}
+
+.collapse-horizontal {
+    width: 0;
+    height: auto;
+    @include transition($transition-collapse-width);
+}
+
+// Font Style
+@for $value from 0 through 6 {
+    $max-font-size: calc(#{var(--text-size-700)} - (#{6 - $value} * 0.4rem));
+    $min-font-size: calc(#{var(--text-size-100)} + (#{6 - $value} * 0.3rem));
+
+    @if $value <= 2 {
+        $line-height: $base-line-height * 0.8;
+    } @else if $value > 2 and $value <= 4 {
+        $line-height: $base-line-height * 0.9;
+    } @else {
+        $line-height: $base-line-height;
+        $fontRatio: 0.625;
+    }
+}
+// Font Style
+@for $value from 0 through 6 {
+    $max_font_size: 4.8rem;
+    $min_font_size: 2.6rem;
+
+    @if $value <=3 {
+        $max_font_size: $base_font_size * 2.4 - 3.8 * $value;
+        $min_font_size: $base_font_size * 1.75 - 2.6 * $value;
+    } @else {
+        $max_font_size: $base_font_size * 1.8 - 2.6 * $value;
+        $min_font_size: $base_font_size * 1.55 - 1.6 * $value;
+    }
+
+    $font_difference: $max_font_size - $min_font_size;
+    $font_calc: calc(
+        0.1rem *
+            #{$fontRatio} *
+            #{$min_font_size} +
+            (100vw * #{$font_difference} / #{$viewport_difference}) -
+            (0.1rem * #{$min_viewport} * #{$font_difference} / #{$viewport_difference})
+    );
+
+    h#{$value},
+    #{$head}#{$value} {
+        font-size: clamp(
+            #{$min-font-size} * 0.1rem * var(--font-ratio),
+            calc(
+                #{$min-font-size} *
+                    0.1rem *
+                    var(--font-ratio) +
+                    (100vw - var(--min-viewport)) *
+                    (#{$max-font-size} - #{$min-font-size}) /
+                    var(--viewport-difference)
+            ),
+            #{$max-font-size} * 0.1rem * var(--font-ratio)
+        );
+        font-family: var(--font-family-jp);
+        font-weight: normal;
+        line-height: $line-height;
+
+        @if $value <= 2 {
+            letter-spacing: 0.1em;
+        } @else if $value > 2 and $value <= 4 {
+            letter-spacing: 0.05em;
+        } @else {
+            letter-spacing: 0.025em;
+        }
+
+        margin-bottom: 0;
+        @if $value <= 3 {
+            font-family: $font-family-h-jp-serif;
+            font-weight: $fontWeightNormal;
+        } @else {
+            font-family: $font-family-h-jp-serif;
+            font-weight: $fontWeightNormal;
+        }
+        @if $value <= 2 {
+            line-height: 1.2;
+            letter-spacing: 0.1em;
+        } @else if $value > 2 and $value <= 4 {
+            line-height: 1.35;
+            letter-spacing: 0.05em;
+        } @else {
+            line-height: 1.5;
+            letter-spacing: 0.025em;
+        }
+    }
+
+    h#{$value},
+    #{$head}#{$value} {
+        font-size: clamp(
+            #{$min-font-size} * 0.1rem * var(--font-ratio),
+            calc(
+                #{$min-font-size} *
+                    0.1rem *
+                    var(--font-ratio) +
+                    (100vw - var(--min-viewport)) *
+                    (#{$max-font-size} - #{$min-font-size}) /
+                    var(--viewport-difference)
+            ),
+            #{$max-font-size} * 0.1rem * var(--font-ratio)
+        );
+        font-family: var(--font-family-jp);
+        font-weight: $fontWeightNormal;
+        line-height: $line-height;
+
+        @if $value <= 2 {
+            line-height: 1.2;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.15em;
+        } @else if $value > 2 and $value <= 4 {
+            line-height: 1.35;
+            letter-spacing: var;
+            margin-bottom: 0.25em;
+        } @else {
+            line-height: 1.5;
+            letter-spacing: 0.025em;
+            margin-bottom: 0.35em;
+        }
+    }
+    // font-size: $font_calc;
+    // @include mq(min-width, xl) {
+    //     font-size: $max_font_size * 0.1rem * $fontRatio;
+    // }
+
+    // @include mq(max-width, sm) {
+    //     font-size: $min_font_size * 0.1rem * $fontRatio;
+    // }
+}
+
+p,
+#{$paragraph} {
+    font-size: clamp(
+        $base-font-size * 0.1rem * var(--font-ratio),
+        calc(
+            $base-font-size * 0.1rem * var(--font-ratio) + (100vw - var(--min-viewport)) *
+                (($base-font-size * 1.2) - $base-font-size) / var(--viewport-difference)
+        ),
+        $base-font-size * 0.1rem * 1.2 * var(--font-ratio)
+    );
+    line-height: $base-line-height;
+    letter-spacing: 0.025em;
+
+    &.__xl {
+        font-size: $base-font-size * 0.1rem * 1 * var(--font-ratio);
+        line-height: $base-line-height * 0.9;
+    }
+    &.__large {
+        font-size: $base-font-size * 0.1rem * 0.95 * var(--font-ratio);
+        line-height: $base-line-height * 0.8;
+    }
+    &.__small {
+        font-size: 1.3rem !important;
+        line-height: $base-line-height * 0.8 !important;
+    }
+    &.__micro {
+        font-size: 1.25rem !important;
+        line-height: $base-line-height * 0.75 !important;
+    }
+    &.__nano {
+        font-size: 1rem !important;
+        line-height: $base-line-height * 0.7 !important;
+    }
+
+    font-size: $font_calc;
+    @include mq(min-width, xl) {
+        font-size: $max_font_size * 0.1rem * $fontRatio;
+    }
+
+    @include mq(max-width, sm) {
+        font-size: $min_font_size * 0.1rem * $fontRatio;
+    }
+    #{$head}#{$value} {
+        margin-bottom: 0;
+    }
+
+    h#{$value} {
+        @if $value <= 2 {
+            margin-bottom: 0.15em;
+        } @else if $value > 2 and $value <= 4 {
+            margin-bottom: 0.25em;
+        } @else {
+            margin-bottom: 0.35em;
+        }
+    }
+}
+p,
+#{$paragraph} {
+    font-size: $base_font_size * 0.1rem * $fontRatio;
+    line-height: 1.75;
+    letter-spacing: 0.025em;
+    @include mq(min-width, sm) {
+        max-width: 38em;
+        margin-left: auto;
+        margin-right: auto;
+        line-height: 1.85;
+        letter-spacing: 0.035em;
+    }
+    @include mq(min-width, xxl) {
+        max-width: 42em;
+        margin-left: auto;
+        margin-right: auto;
+        line-height: 2;
+        letter-spacing: 0.05em;
+    }
+
+    &.__xl {
+        font-size: $base_font_size * 0.1rem * 1 * $fontRatio;
+        line-height: 1.3;
+    }
+    &.__large {
+        font-size: $base_font_size * 0.1rem * 0.95 * $fontRatio;
+        line-height: 1.2;
+    }
+    &.__small {
+        font-size: 1.3rem !important;
+        line-height: 1.2 !important;
+    }
+    &.__micro {
+        font-size: 1.25rem !important;
+        line-height: 1.1 !important;
+    }
+    &.__nano {
+        font-size: 1rem !important;
+        line-height: 1.05 !important;
+    }
+}
+
+#{$paragraph} {
+    margin-bottom: 0.5em;
+}
+
+// body {
+//     font-family: var(--font-family-p-jp-sans);
+// }
+// .ff-serif {
+//     font-family: var(--font-family-jp) !important;
+// }
+// .ff-sans {
+//     font-family: var(--font-family-p-jp-sans) !important;
+// }

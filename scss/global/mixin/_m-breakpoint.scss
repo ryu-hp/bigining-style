@@ -1,0 +1,31 @@
+$breakpoints: (
+    xxs: 0,
+    xs: 360,
+    sm: 540,
+    md: 820,
+    lg: 1024,
+    xl: 1280,
+    xxl: 1440,
+    xxxl: 1680
+) !default;
+
+$breakpointsBeta: (
+    s: 480px,
+    m: 820px,
+    l: 1024px,
+    xl: 1200px,
+
+    s_ov: 481px,
+    m_ov: 821px,
+    l_ov: 1025px,
+    xl_ov: 1201px
+);
+
+$breakpoints: (
+    sp-sm: 0,
+    sp-md: 360,
+    tb-sm: 540,
+    tb-lg: 820,
+    pc-sm: 1024,
+    pc-md: 1280,
+) !default;

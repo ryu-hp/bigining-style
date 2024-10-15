@@ -1,0 +1,119 @@
+@use "../global" as *;
+
+.section {
+    padding-top: 2em;
+    padding-bottom: 2em;
+    padding-left: 1.5%;
+    padding-right: 1.5%;
+}
+.subsection {
+    padding-top: 1em;
+    padding-bottom: 1em;
+    padding-left: 1%;
+    padding-right: 1%;
+}
+.main-contents {
+    background-size: cover;
+    overflow: hidden;
+}
+
+.main-title {
+    margin-top: 30px;
+    // height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.title {
+    color: var(--#{$name}_#{color}_#{primary2});
+}
+
+.item-scroll {
+    overflow: scroll;
+}
+
+.schedule-image img {
+    // min-width: 720px;
+}
+
+.wpcf7-checkbox {
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 3em;
+    row-gap: 0;
+}
+.wpcf7-checkbox input {
+    height: 24px;
+    width: 24px;
+    line-height: 24px;
+}
+
+.wpcf7-list-item-label {
+    padding-left: 1em;
+    line-height: 24px;
+}
+.wpcf7-list-item label {
+    display: flex;
+    align-items: center;
+}
+
+._bg-design {
+    height: 30vh;
+    overflow: hidden;
+    /* background-attachment: fixed; */
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-position: center;
+}
+
+._bg-design img {
+    position: fixed;
+    z-index: -1;
+}
+
+.group-image {
+    box-shadow: 0 0 10px var(--isolex_color_shadow);
+    border-radius: 1em;
+    overflow: hidden;
+}
+
+@media screen and (min-width: 480px) {
+    ._bg-design {
+        height: 50vh;
+        background-size: cover;
+        overflow: hidden;
+        background-attachment: fixed;
+        background-position: center;
+    }
+
+    .section {
+        padding-top: 3em;
+        padding-bottom: 3em;
+    }
+
+    .subsection {
+        padding-top: 2em;
+        padding-bottom: 2em;
+    }
+
+    .main {
+        max-width: 1080px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 60px;
+        // background: #fff;
+        border-radius: 20px;
+        padding: 1em 3%;
+        // box-shadow: 0 0 20px #dddd;
+    }
+
+    .main-title {
+        margin-top: 60px;
+        // height: 200px;
+    }
+
+    .grid-column-2 {
+        grid-template-columns: 1fr 1fr;
+    }
+}

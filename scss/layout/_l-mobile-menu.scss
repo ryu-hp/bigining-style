@@ -1,0 +1,36 @@
+@use "../global" as *;
+
+.mobile-menu,
+#search-mobile-tablet {
+    display: none;
+    @media screen and (min-width: 992px) {
+        display: none;
+    }
+}
+.search-box-try-n-buy {
+    @media screen and (max-width: 991px) {
+        display: none;
+    }
+}
+
+.mobile-menu {
+    a {
+        color: var(--#{$name}_color_black);
+        transition: all 0.3s;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    a > span {
+        font-size: 12px;
+        transition: transform 0.3s;
+    }
+    .nav__list {
+        width: 100%;
+    }
+    .mobile-menu-list a {
+        width: 100%;
+        line-height: 36px;
+        display: block;
+    }
+}

@@ -1,0 +1,13 @@
+@use "../global" as *;
+/* =========================================================
+    Tag - New
+========================================================= */
+.tag-new {
+    background: rgb(205 160 119);
+    margin: 0.4em 0;
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: rgb(255 255 255);
+    border-radius: 2px;
+}

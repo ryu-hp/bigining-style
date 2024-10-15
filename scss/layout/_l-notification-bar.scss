@@ -1,0 +1,19 @@
+@use "../global" as *;
+
+.sticky-notification-bar {
+    top: 0;
+    width: 100%;
+    z-index: 10;
+    text-align: center;
+    position: relative;
+    line-height: $notification_bar_height;
+    height: $notification_bar_height !important;
+    background-color: var(--#{$name}_color_gray4);
+    // background-color: #c5dbf2 !important;
+    a {
+        color: var(--#{$name}_color_hyperlink);
+        font-weight: $fontWeightBold;
+        text-decoration: none;
+        font-size: 14px !important;
+    }
+}

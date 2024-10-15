@@ -1,0 +1,246 @@
+@use "../global" as *;
+
+$min-viewport: map-get($breakpoints, sm); //480
+$max-viewport: map-get($breakpoints, xxl); //1366
+$min-viewport: 320; //480
+$max-viewport: 1920; //1366
+$viewport-difference: #{calc($max-viewport - $min-viewport)};
+
+$root-font-size: 100;
+$font-jump-ratio: 1.15;
+$base-font-size: 16;
+$base-max-font-size: 72;
+$base-min-font-size: 24;
+$base-line-height: 1.5;
+$base-letter-spacing: 0.05;
+$base-font-weight: 700;
+$base-text-margin: 0.5;
+$head: ".h";
+$paragraph: ".p";
+$cropTop: 8;
+
+// FontFamily
+$font-family-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace !important;
+
+$min-font-scale: 80;
+$max-font-scale: 800;
+
+$precision: 3; // 計算結果の小数点以下の桁数
+
+$transition-speed: 0.3s;
+
+// ヘルパー関数：指数計算を行う
+@function pow($base, $exponent) {
+    @if $exponent == 0 {
+        @return 1;
+    }
+    $result: 1;
+    @for $i from 1 through abs($exponent) {
+        @if $exponent > 0 {
+            $result: $result * $base;
+        } @else {
+            $result: calc($result / $base);
+        }
+    }
+    @return $result;
+}
+
+// 小数点以下の桁数を制御する関数
+@function to-fixed($number, $precision) {
+    $factor: pow(10, $precision);
+    @return calc(round($number * $factor) / $factor);
+}
+
+// rootに minimum font と maximum font の設定値を生成
+:root {
+    @for $i from $min-font-scale through $max-font-scale {
+        $is-step: false;
+        $exponent: 0;
+        @if $i <= 100 {
+            @if $i % 10 == 0 {
+                $is-step: true;
+                $exponent: calc(($i - 100) / 10);
+            }
+        } @else {
+            @if $i % 100 == 0 {
+                $is-step: true;
+                $exponent: calc(($i - 100) / 100);
+            }
+        }
+
+        @if $is-step {
+            $scale-value: pow($font-jump-ratio * 1.03, $exponent);
+            $scale-value-min: pow($font-jump-ratio * 0.97, $exponent);
+            // ex: --text-size-200: 1.2rem;
+            --text-size-max-#{$i}: #{to-fixed(calc($base-font-size * $scale-value * 0.0625), $precision)};
+            --text-size-min-#{$i}: #{to-fixed(calc($base-font-size * $scale-value-min * 0.0625), $precision)};
+        }
+    }
+}
+
+// rootに各種設定値を付与
+:root {
+    --min-viewport: #{$min-viewport};
+    --max-viewport: #{$max-viewport};
+    --viewport-difference: #{$viewport-difference};
+    --font-family-jp-sans: #{$font-family-jp-sans};
+    --font-family-jp-serif: #{$font-family-jp-serif};
+    --font-family-en-sans: #{$font-family-en-sans};
+    --font-family-en-serif: #{$font-family-en-serif};
+    --font-mono: #{$font-family-mono};
+    --root-font-size: #{$root-font-size};
+    --base-font-size: #{$base-font-size};
+    --root-font: calc(var(--base-font-size) * var(--root-font-size) / 100);
+    --font-jump-ratio: #{$font-jump-ratio};
+    --base-font-weight: #{$base-font-weight};
+    --base-line-height: #{$base-line-height};
+    --base-letter-spacing: #{$base-letter-spacing};
+    --base-background-color: #fff;
+    --base-font-color: #000;
+    --base-text-margin: #{$base-text-margin};
+}
+
+// 全体基準フォントサイズの設定
+html {
+    font-size: calc(var(--root-font-size) * 0.01); /* 16px */
+}
+
+// body内フォントの設定
+body {
+    font-family: var(--font-family-jp-sans);
+    color: var(--base-font-color);
+    font-size: calc(var(--root-font) * 1px);
+    background: var(--base-background-color);
+}
+
+// 基本トランジションの設定
+$transition-base: ease-in-out var($transition-speed) !default;
+$transition-fade: opacity var($transition-speed) linear !default;
+$transition-collapse-width: width var($transition-speed) ease !default;
+$transition-collapse-height: height var($transition-speed) ease !default;
+
+.collapse-vertical {
+    &:not(.show) {
+        display: none;
+    }
+}
+
+.collapsing {
+    height: 0;
+    overflow: hidden;
+    transition: $transition-collapse-height;
+}
+
+.collapse-horizontal {
+    width: 0;
+    height: auto;
+    transition: $transition-collapse-width;
+}
+
+// Font Style Head
+@for $value from 0 through 6 {
+    h#{$value},
+    #{$head}#{$value} {
+        font-size: clamp(
+            var(--text-size-min-#{$max-font-scale - $value * 100}) * 1rem,
+            var(--text-size-min-#{$max-font-scale - $value * 100}) *
+                1rem +
+                (
+                    var(--text-size-max-#{$max-font-scale - $value * 100}) -
+                        var(--text-size-min-#{$max-font-scale - $value * 100})
+                )/
+                (var(--max-viewport) - var(--min-viewport)) *
+                (100vw - var(--min-viewport) * 1px) *
+                var(--root-font),
+            var(--text-size-max-#{$max-font-scale - $value * 100}) * 1rem
+        );
+        font-weight: var(--base-font-weight);
+        line-height: calc(var(--base-line-height) * 0.8);
+        @if $value > 3 {
+            letter-spacing: calc(var(--base-letter-spacing) * 1.5em);
+            margin-top: calc(var(--base-text-margin) * 2.25rem);
+            margin-bottom: calc(var(--base-text-margin) * 1rem);
+        } @else {
+            letter-spacing: calc(var(--base-letter-spacing) * ($value * 0.25) * 1em);
+            margin-top: calc(var(--base-text-margin) * 2.25rem);
+            margin-bottom: calc(var(--base-text-margin) * 1rem);
+        }
+        @include text-crop;
+    }
+}
+
+// Font Style Paragraph
+p {
+    font-size: clamp(
+        var(--base-font-size) * 0.625 * 0.1rem,
+        var(--base-font-size) * 0.625 * 0.1rem + (var(--base-font-size) * 0.625 * 0.15)/ (
+                var(--max-viewport) - var(--min-viewport)
+            ) * (100vw - var(--min-viewport) * 1px) * var(--root-font),
+        var(--base-font-size) * 0.625 * 0.115rem
+    );
+    line-height: calc(var(--base-line-height) * 1.5);
+    letter-spacing: calc(var(--base-letter-spacing) * 0.5rem);
+    margin-top: calc(var(--base-text-margin) * 2.25rem);
+    margin-bottom: calc(var(--base-text-margin) * 1rem);
+    @include text-crop;
+}
+
+@for $value from 1 through 5 {
+    #{$paragraph}#{$value} {
+        font-size: clamp(
+            var(--base-font-size) * (1.45 - 0.15 * $value) * 0.625 * 0.1rem,
+            var(--base-font-size) *
+                (1.45 - 0.15 * $value) *
+                0.625 *
+                0.1rem +
+                (var(--base-font-size) * 0.15)/
+                (var(--max-viewport) - var(--min-viewport)) *
+                (100vw - var(--min-viewport) * 1px) *
+                var(--root-font),
+            var(--base-font-size) * (1.55 - 0.15 * $value) * 0.625 * 0.1rem
+        );
+        line-height: calc(var(--base-line-height) * 1.5);
+        letter-spacing: calc(var(--base-letter-spacing) * 1em);
+        margin-top: calc(var(--base-text-margin) * 2.25rem);
+        margin-bottom: calc(var(--base-text-margin) * 1rem);
+        @include text-crop;
+    }
+}
+
+// Font Family
+.__serif {
+    font-family: var(--font-family-jp-serif) !important;
+}
+.__sans {
+    font-family: var(--font-family-jp-sans) !important;
+}
+
+.text-wrapper {
+    white-space: nowrap;
+    vertical-align: baseline;
+    padding: 0.5rem;
+}
+
+#{$paragraph} {
+    margin-bottom: 3em;
+}
+
+// body {
+//     font-family: $font-family-p-jp-sans;
+// }
+// .ff-serif {
+//     font-family: $font-family-h-jp-serif !important;
+// }
+
+// .ff-sans {
+//     font-family: $font-family-p-jp-sans !important;
+// }
+
+// .ff-num {
+//     font-family: $font-family-hero !important;
+// }
+
+// .ff-hero {
+//     font-family: $font-family-hero !important;
+//     letter-spacing: 0.025em;
+// }

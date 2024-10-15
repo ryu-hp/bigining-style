@@ -1,0 +1,74 @@
+@use "../global" as *;
+// =========================================================
+//    Footer V1
+// =========================================================
+
+$sec: "footer";
+$footer-width: 1200px;
+
+footer {
+    background-color: var(--#{$name}_#{$tag}_primary9);
+}
+
+.footer {
+    padding-top: 50px;
+    max-width: $footer-width;
+    margin: 0 auto;
+
+    .container {
+        display: flex;
+        max-width: unset;
+        flex-direction: column;
+        @include mq(min-width, xl) {
+            flex-direction: row;
+        }
+        > div {
+            width: calc(100% / 6);
+            margin-bottom: 3em;
+            @include mq(max-width, sm) {
+                > h3 {
+                    text-align: center;
+                }
+            }
+        }
+    }
+    .footer-links {
+        line-height: 1.8;
+        display: flex;
+        flex-wrap: wrap;
+        > li {
+            width: 50%;
+            @include mq(min-width, xl) {
+                width: 100%;
+            }
+            :hover {
+                background-color: var(--#{$name}_#{$tag}_primary1);
+                color: var(--#{$name}_#{$tag}_white);
+            }
+        }
+        a {
+            padding-left: 1em;
+            padding-right: 1em;
+            display: block;
+            font-size: var(--#{$name}_font_size_base);
+            color: var(--#{$name}_font_color_base);
+        }
+    }
+
+    h3 {
+        font-size: 1.7rem;
+        font-family: "Noto Sans JP";
+    }
+}
+
+.footerlinks {
+    display: none;
+}
+
+.faq-wrapper {
+    display: none;
+}
+
+#theme-popup {
+    display: none;
+}

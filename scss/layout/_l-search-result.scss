@@ -1,0 +1,59 @@
+$post_type: "archive";
+$pageCat: "search-result";
+
+.#{$post_type} {
+  &-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1em;
+    &-item {
+      img {
+        height: 360px;
+        overflow: hidden;
+        width: 100%;
+        object-fit: cover;
+      }
+    }
+    .__title {
+      font-weight: 700;
+    }
+    .__date {
+      font-weight: 700;
+      font-size: 1.2rem;
+      color: #4d4d4d;
+    }
+  }
+  &-#{$pageCat} {
+    margin-top: 100px;
+    .c-search-form-content {
+      position: relative;
+    }
+    .c-search-form-content__input {
+      font-size: 17px;
+      line-height: 40px;
+      height: 64px;
+      padding: 12px 12px 12px 38px;
+    }
+  }
+}
+
+.#{$pageCat} {
+  &-heading {
+    margin-top: 2em;
+    margin-bottom: 1.2em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 40px;
+  }
+  &-quantity {
+    margin-left: 2em;
+  }
+  &-num {
+    font-size: 30px;
+    font-weight: 700;
+  }
+  &-text {
+    font-weight: 700;
+  }
+}

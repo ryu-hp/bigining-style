@@ -1,0 +1,42 @@
+$variable-prefix: "nox";
+$name: $variable-prefix;
+$version: "?ver=202407";
+
+$screenSize: (xs, sm, md, lg, xl, xxl);
+
+$header_padding: 5%;
+$header_height: 5.6rem;
+$header_subheight: 3.8rem;
+
+$base_font_size: 17.5;
+$fontRatio: 0.625;
+$base_menu_font_size: 1.4rem;
+$base_font_color: #3c4449;
+$base_icon-button_size: 3.6rem;
+$notification_bar_height: 2.6rem;
+
+// Font-family-JP
+$font-family-h-jp-serif: "Noto Sans JP", sans-serif;
+$font-family-h-jp-sans: "Noto Sans JP", sans-serif;
+$font-family-p-jp-sans: "Noto Sans JP", sans-serif;
+$font-family-hero: "Noto Sans JP", sans-serif;
+
+$font-family-jp-sans: "Halant", "Shippori Mincho B1", "Noto Sans JP", sans-serif;
+$font-family-jp-serif: "Halant", "Shippori Mincho B1", "Noto Sans JP", sans-serif;
+$font-family-en-sans: "Halant", "Shippori Mincho B1", "Noto Sans JP", sans-serif;
+$font-family-en-serif: "Halant", "Shippori Mincho B1", "Noto Sans JP", sans-serif;
+
+$fontWeightLight: 300;
+$fontWeightNormal: 600;
+$fontWeightBold: 900;
+
+$tag: "color";
+
+$logoWidthPC: 24;
+$logoWidthSP: 18;
+
+$HeaderMenuWidth: 1200;
+
+$navbarWidth: 1200;
+$paddingBase: 1;
+$marginBase: 1;

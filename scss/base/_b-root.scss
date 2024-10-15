@@ -1,0 +1,12 @@
+@use "../global" as *;
+
+:root {
+    @each $key, $value in $theme-colors {
+        --#{$name}_#{$tag}_#{$key}: #{$value};
+    }
+
+    --#{$name}_font_size_base: #{$base_font_size * 0.1rem};
+    --#{$name}_font_color_base: #{$base_font_color};
+    --#{$name}_font_size_small: #{$base_font_size * 0.09rem};
+    --#{$name}_font_size_micro: #{$base_font_size * 0.075rem};
+}

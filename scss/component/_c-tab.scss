@@ -1,0 +1,214 @@
+@use "../global" as *;
+// =========================================================
+//  module - tab
+// =========================================================
+
+// .tab-#{$name} {
+//     .__primary {
+//         .___2 {
+//         }
+//     }
+// }
+
+// tab Size
+$tabFont: 1.2rem;
+$tabFontMin: 10;
+$tabFontMax: 14;
+$tabMinWidth: 90;
+$tabMaxWidth: 180;
+
+$tab-height: 64;
+$tab-borderWidth: 3;
+$tab-transition: 0.15s;
+
+@mixin tab-base {
+    display: inline-block;
+    // height: $tab-height * 1px;
+    line-height: calc(#{$tab-height} * 1px - (#{$tab-borderWidth} * 2px));
+    line-height: 2;
+    @include mq(max-width, sm) {
+        font-size: $tabFontMin * 0.1rem !important;
+        // line-height: calc(#{$tabFontMin} * 1px - #{$tab-borderWidth} * 2px);
+    }
+    @include mq(min-width, xl) {
+        font-size: $tabFontMax * 0.1rem !important;
+        // line-height: calc(#{$tabFontMax} * 1px - #{$tab-borderWidth} * 2px);
+    }
+    // padding-right: .5em;
+    // padding-left: .5em;
+    padding: 3px 0.5em;
+    line-height: 1;
+    min-width: $tabMinWidth * 1px;
+    max-width: $tabMaxWidth * 1px;
+    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+    border-radius: 100px;
+    transition: $tab-transition;
+    font-weight: #{$fontWeightBold} !important;
+    font-size: calc(#{$tabFont}) !important;
+}
+
+@mixin tab-color($btnColor: #333, $btnBGColor: #fff, $btnBorder: #333) {
+    color: $btnColor;
+    background-color: $btnBGColor;
+    border: ($tab-borderWidth * 1px) solid $btnBorder;
+}
+
+$tabDefault: (
+    primary: (
+        base: $primary1,
+        hover: $primary1
+    ),
+    secondary: (
+        base: none,
+        hover: $primary1
+    ),
+    tertiary: (
+        base: #fff,
+        hover: $primary3
+    ),
+    ghost: (
+        base: $gray3,
+        hover: $gray2
+    ),
+    cart: (
+        base: $primary2,
+        hover: $primary3
+    ),
+    tryandbuy: (
+        base: $primary2,
+        hover: $primary3
+    )
+);
+
+$tabs: (
+    1: (
+        base: $primary1,
+        hover: $primary1
+    ),
+    2: (
+        base: $primary2,
+        hover: $primary3
+    ),
+    3: (
+        base: $primary2,
+        hover: $primary3
+    ),
+    4: (
+        base: $primary2,
+        hover: $primary3
+    ),
+    5: (
+        base: $primary2,
+        hover: $primary3
+    ),
+    6: (
+        base: $primary2,
+        hover: $primary3
+    ),
+    7: (
+        base: $primary2,
+        hover: $primary3
+    ),
+    8: (
+        base: $primary2,
+        hover: $primary3
+    )
+);
+
+.tab-#{$name} {
+    @include tab-base;
+    @include tab-color;
+    &:disabled {
+        @include tab-color($btnColor: #fff, $btnBGColor: #ccc, $btnBorder: #ccc);
+    }
+    @each $tabKey1, $tab-properties in $tabDefault {
+        @at-root #{&}.__#{$tabKey1} {
+            $btn-base-color: map-get($tab-properties, base);
+            $btn-hover-color: map-get($tab-properties, hover);
+
+            @if ($tabKey1 == primary) {
+                @include tab-color($btnColor: #fff, $btnBGColor: $btn-base-color, $btnBorder: $btn-base-color);
+            } @else if ($tabKey1 == secondary) {
+                @include tab-color($btnColor: $btn-base-color, $btnBGColor: #fff, $btnBorder: $btn-base-color);
+            } @else if ($tabKey1 == tertiary) {
+                @include tab-color($btnColor: $btn-base-color, $btnBGColor: #fff0, $btnBorder: $btn-base-color);
+            } @else {
+                @include tab-color(#000, #fff, #000);
+            }
+
+            &:hover {
+                @if ($tabKey1 == primary) {
+                    @include tab-color(#fff, $btn-hover-color, $btn-hover-color);
+                } @else if ($tabKey1 == secondary) {
+                    @include tab-color(#fff, $btn-hover-color, $btn-hover-color);
+                } @else if ($tabKey1 == tertiary) {
+                    @include tab-color($btnColor: $btn-hover-color, $btnBGColor: #fff0, $btnBorder: $btn-hover-color);
+                } @else {
+                    @include tab-color(#000, #fff, #000);
+                }
+            }
+
+            &:active {
+                @include tab-color(
+                    $btnColor: #fff,
+                    $btnBGColor: map-get($tab-properties, base),
+                    $btnBorder: map-get($tab-properties, base)
+                );
+            }
+        }
+
+        @each $tabKey2, $btnColor in $tabs {
+            $btn-base-color: map-get($btnColor, base);
+            $btn-hover-color: map-get($btnColor, hover);
+            @at-root #{&}.__#{$tabKey1}.___#{$tabKey2} {
+                @if ($tabKey1 == primary) {
+                    @include tab-color($btnColor: #fff, $btnBGColor: $btn-base-color, $btnBorder: $btn-base-color);
+                } @else if ($tabKey1 == secondary) {
+                    @include tab-color($btnColor: $btn-base-color, $btnBGColor: #fff, $btnBorder: $btn-base-color);
+                } @else if ($tabKey1 == tertiary) {
+                    @include tab-color($btnColor: $btn-base-color, $btnBGColor: #fff0, $btnBorder: $btn-base-color);
+                } @else {
+                    @include tab-color(#000, #fff, #000);
+                }
+
+                &:hover {
+                    @if ($tabKey1 == primary) {
+                        @include tab-color(#fff, $btn-hover-color, $btn-hover-color);
+                    } @else if ($tabKey1 == secondary) {
+                        @include tab-color(#fff, $btn-hover-color, $btn-hover-color);
+                    } @else if ($tabKey1 == tertiary) {
+                        @include tab-color($btn-hover-color, #fff0, $btn-hover-color);
+                    } @else {
+                        @include tab-color(#000, #fff, #000);
+                    }
+                }
+            }
+        }
+    }
+    &.__thin {
+        height: $tab-height * 1px * 0.85;
+        line-height: calc((#{$tab-height} * 1px - #{$tab-borderWidth} * 2px) * 0.85);
+    }
+    &.__thick {
+        height: $tab-height * 1px * 1.15;
+        line-height: calc((#{$tab-height} * 1px - #{$tab-borderWidth} * 2px) * 1.15);
+    }
+    &.__tab-xl {
+        height: $tab-height * 1px * 0.85;
+        line-height: calc((#{$tab-height} * 1px - #{$tab-borderWidth} * 2px) * 0.85);
+    }
+    &.__tab-lg {
+        height: $tab-height * 1px * 1.15;
+        line-height: calc((#{$tab-height} * 1px - #{$tab-borderWidth} * 2px) * 1.15);
+    }
+    &.__tab-sm {
+        height: $tab-height * 1px * 1.15;
+        line-height: calc((#{$tab-height} * 1px - #{$tab-borderWidth} * 2px) * 1.15);
+    }
+    &.__tab-xs {
+        height: $tab-height * 1px * 1.15;
+        line-height: calc((#{$tab-height} * 1px - #{$tab-borderWidth} * 2px) * 1.15);
+    }
+}

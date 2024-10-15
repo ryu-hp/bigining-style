@@ -1,0 +1,49 @@
+@charset "UTF-8";
+/* =========================================================
+  Common
+========================================================= */
+$devEnv: "live";
+
+@forward "global";
+
+@forward "base";
+
+@forward "component";
+
+@forward "module";
+
+@forward "layout";
+
+@forward "project";
+
+// :root {
+//   --white: #ffffff;
+//   --black: #383079;
+//   --gray: #b8b5d2;
+//   --light-gray: #fafcff;
+//   --light-blue: #fcfdff;
+//   --light-blue-gray: #eef5ff;
+//   --blue: #bbd3ff;
+//   --purple: #8074cc;
+//   --normal-shadow: 0 0 6px 0 rgb(33, 33, 111, 0.15), 4px 6px 10px -5px rgb(2 2 4 / 10%);
+//   --input-shadow: inset 1.5px 1.5px 2.5px rgba(33, 33, 111, 0.15), inset -0.5px -0.5px 2px rgba(33, 33, 111, 0.085), 0.5px 0.5px 1.5px var(--white);
+//   --button-color: #8798b7;
+//   --button-gradient: linear-gradient(-225deg, var(--light-blue-gray), var(--white));
+//   --button-shadow: inset 0 -2px 0 0 #c6c7db, inset 0 0 1px 1px var(--white), 0 1px 2px 1px rgba(40, 40, 100, 0.35);
+//   --button-shadow-active: inset 0 0 1px 1px var(--white), 0 0 0 1px rgb(40, 40, 100, 0.15);
+//   --thumb-shadow: 0px 5px 10px rgba(33, 33, 111, 0.2);
+//   --thumb-gradient: radial-gradient( circle farthest-corner at 35% 35%, var(--white), var(--blue) 35%, var(--button-color) );
+//   --code-shadow: inset 2px 2px 6px rgba(33, 33, 111, 0.2);
+//   --border-radius: 5px;
+//   --width: clamp(270px, 100% - 40px, 400px);
+//   --width-code: clamp(270px, 100% - 40px, 600px);
+//   --font-family: "Source Code Pro", sans-serif;
+// }
+
+// header .content_width {
+//   display: flex;
+//   justify-content: space-between;
+//   align-items: center;
+//   padding-top: var(--whitespace-200);
+//   padding-bottom: var(--whitespace-200);
+// }

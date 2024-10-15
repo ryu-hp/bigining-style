@@ -1,0 +1,108 @@
+/* 前へ次への矢印カスタマイズ */
+.swiper-button-prev,
+.swiper-button-next {
+  height: 50px;
+  width: 50px;
+}
+/* 前へ次への矢印カスタマイズ */
+.swiper-button-prev:after,
+.swiper-button-next:after {
+    background-repeat: no-repeat;
+    background-size: contain;
+    content: "";
+    height: 0;
+    /* margin: auto; */
+    width: 0;
+    font-size: 0;
+}
+/* 前への矢印カスタマイズ */
+.swiper-button-prev:after {
+  background-image: url(前への画像パス);
+}
+/* 次への矢印カスタマイズ */
+.swiper-button-next:after {
+  background-image: url(次への画像パス);
+}
+/* 画像サイズ調整 */
+.swiper-slide .swiper_img > img {
+    height: 65vh;
+    width: auto;
+    max-width: 100%;
+    object-fit: cover;
+}
+.swiper-button-prev{
+    bottom: 10px;
+    top: unset;
+    left: calc(50vw - 180px);
+    z-index: 11;
+}
+.swiper-button-next{
+    bottom: 10px;
+    top: unset;
+    right: calc(50vw - 180px);
+    z-index: 11;
+}
+
+.swiper-module{ 
+    .swiper-button-next,
+    .swiper-button-prev {
+        box-sizing: border-box;
+        width: 40px;
+        height: 40px;
+        margin-top: -20px;
+        color: #fff;
+    }
+}
+
+.c-button-trigger, .c-button-trigger--thick {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    margin: 0;
+    color: #fff;
+    cursor: pointer;
+    background-color: rgba(0,0,0,.2);
+    border: 1px solid hsla(0,0%,100%,.7);
+    border-radius: 100%;
+    outline: 0;
+    appearance: none;
+}
+
+.c-button-trigger--thick .c-icon--line-arrow-left,
+.c-button-trigger .c-icon--line-arrow-left {
+    transform: translateX(-1px);
+}
+
+[class*=" c-icon--"], [class^=c-icon--] {
+    font-family: sans-serif;
+    line-height: 1;
+    font-style: normal;
+    font-weight: 400;
+    font-feature-settings: normal;
+    font-variant: normal;
+    text-transform: none;
+    speak: never;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.c-icon--line-arrow-left:before {
+    content: "\e938";
+}
+.c-icon--line-arrow-right:before {
+    content: "\e939";
+}
+
+[class*=" c-icon--"],
+[class^=c-icon--]{
+    &:before{
+        font-family: inherit;
+    }
+}
+
+.swiper-pagination-bullet-active{
+    background: #9d2235;
+}

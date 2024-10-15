@@ -1,0 +1,229 @@
+@use "../global" as *;
+// =========================================================
+//  module - button
+// =========================================================
+
+// .button-#{$name} {
+//     .__primary {
+//         .___2 {
+//         }
+//     }
+// }
+
+// Button Size
+$buttonFont: calc(1.3rem + 0.3vw);
+$buttonFontMin: 17;
+$buttonFontMax: 21;
+
+$buttonMinWidth: 280;
+$buttonMaxWidth: 360;
+
+$button-height: 64;
+$button-borderWidth: 3;
+$button-transition: 0.15s;
+
+@mixin button-base {
+    display: inline-block;
+    height: $button-height * 1px;
+    line-height: calc(#{$button-height} * 1px - (#{$button-borderWidth} * 2px));
+    @include mq(max-width, sm) {
+        font-size: $buttonFontMin * 0.1rem !important;
+        // line-height: calc(#{$buttonFontMin} * 1px - #{$button-borderWidth} * 2px);
+    }
+    @include mq(min-width, xl) {
+        font-size: $buttonFontMax * 0.1rem !important;
+        // line-height: calc(#{$buttonFontMax} * 1px - #{$button-borderWidth} * 2px);
+    }
+
+    padding-right: $button-height * 1px / 2;
+    padding-left: $button-height * 1px / 2;
+
+    min-width: $buttonMinWidth * 1px;
+    max-width: $buttonMaxWidth * 1px;
+    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+
+    border-radius: 100px;
+
+    transition: $button-transition;
+    font-weight: #{$fontWeightBold} !important;
+    font-size: calc(#{$buttonFont}) !important;
+}
+
+@mixin button-color($btnColor: #333, $btnBGColor: #fff, $btnBorder: #333) {
+    color: $btnColor;
+    background-color: $btnBGColor;
+    border: ($button-borderWidth * 1px) solid $btnBorder;
+}
+
+$buttonDefault: (
+    primary: (
+        base: $primary1,
+        hover: $primary1
+    ),
+    secondary: (
+        base: none,
+        hover: $primary1
+    ),
+    tertiary: (
+        base: #fff,
+        hover: $primary3
+    ),
+    ghost: (
+        base: $gray3,
+        hover: $gray2
+    ),
+    cart: (
+        base: $primary2,
+        hover: $primary3
+    ),
+    tryandbuy: (
+        base: $primary2,
+        hover: $primary3
+    )
+);
+
+$buttons: (
+    1: (
+        base: $primary1,
+        hover: $primary1
+    ),
+    2: (
+        base: $primary2,
+        hover: $primary3
+    ),
+    3: (
+        base: $primary2,
+        hover: $primary3
+    ),
+    4: (
+        base: $primary2,
+        hover: $primary3
+    ),
+    5: (
+        base: $primary2,
+        hover: $primary3
+    ),
+    6: (
+        base: $primary2,
+        hover: $primary3
+    ),
+    7: (
+        base: $primary2,
+        hover: $primary3
+    ),
+    8: (
+        base: $primary2,
+        hover: $primary3
+    )
+);
+
+.button-#{$name} {
+    @include button-base;
+    @include button-color;
+    &:disabled {
+        @include button-color($btnColor: #fff, $btnBGColor: #ccc, $btnBorder: #ccc);
+    }
+    @each $buttonKey1, $button-properties in $buttonDefault {
+        @at-root #{&}.__#{$buttonKey1} {
+            $btn-base-color: map-get($button-properties, base);
+            $btn-hover-color: map-get($button-properties, hover);
+
+            @if ($buttonKey1 == primary) {
+                @include button-color($btnColor: #fff, $btnBGColor: $btn-base-color, $btnBorder: $btn-base-color);
+            } @else if ($buttonKey1 == secondary) {
+                @include button-color($btnColor: $btn-base-color, $btnBGColor: #fff, $btnBorder: $btn-base-color);
+            } @else if ($buttonKey1 == tertiary) {
+                @include button-color($btnColor: $btn-base-color, $btnBGColor: #fff0, $btnBorder: $btn-base-color);
+            } @else {
+                @include button-color(#000, #fff, #000);
+            }
+
+            &:hover {
+                @if ($buttonKey1 == primary) {
+                    @include button-color(#fff, $btn-hover-color, $btn-hover-color);
+                } @else if ($buttonKey1 == secondary) {
+                    @include button-color(#fff, $btn-hover-color, $btn-hover-color);
+                } @else if ($buttonKey1 == tertiary) {
+                    @include button-color(
+                        $btnColor: $btn-hover-color,
+                        $btnBGColor: #fff0,
+                        $btnBorder: $btn-hover-color
+                    );
+                } @else {
+                    @include button-color(#000, #fff, #000);
+                }
+            }
+
+            &:active {
+                @include button-color(
+                    $btnColor: #fff,
+                    $btnBGColor: map-get($button-properties, base),
+                    $btnBorder: map-get($button-properties, base)
+                );
+            }
+        }
+
+        @each $buttonKey2, $btnColor in $buttons {
+            $btn-base-color: map-get($btnColor, base);
+            $btn-hover-color: map-get($btnColor, hover);
+            @at-root #{&}.__#{$buttonKey1}.___#{$buttonKey2} {
+                @if ($buttonKey1 == primary) {
+                    @include button-color($btnColor: #fff, $btnBGColor: $btn-base-color, $btnBorder: $btn-base-color);
+                } @else if ($buttonKey1 == secondary) {
+                    @include button-color($btnColor: $btn-base-color, $btnBGColor: #fff, $btnBorder: $btn-base-color);
+                } @else if ($buttonKey1 == tertiary) {
+                    @include button-color($btnColor: $btn-base-color, $btnBGColor: #fff0, $btnBorder: $btn-base-color);
+                } @else {
+                    @include button-color(#000, #fff, #000);
+                }
+
+                &:hover {
+                    @if ($buttonKey1 == primary) {
+                        @include button-color(#fff, $btn-hover-color, $btn-hover-color);
+                    } @else if ($buttonKey1 == secondary) {
+                        @include button-color(#fff, $btn-hover-color, $btn-hover-color);
+                    } @else if ($buttonKey1 == tertiary) {
+                        @include button-color($btn-hover-color, #fff0, $btn-hover-color);
+                    } @else {
+                        @include button-color(#000, #fff, #000);
+                    }
+                }
+            }
+        }
+    }
+    &.__thin {
+        height: $button-height * 1px * 0.85;
+        line-height: calc((#{$button-height} * 1px - #{$button-borderWidth} * 2px) * 0.85);
+    }
+    &.__thick {
+        height: $button-height * 1px * 1.15;
+        line-height: calc((#{$button-height} * 1px - #{$button-borderWidth} * 2px) * 1.15);
+    }
+    &.__button-xl {
+        height: $button-height * 1px * 0.85;
+        line-height: calc((#{$button-height} * 1px - #{$button-borderWidth} * 2px) * 0.85);
+    }
+    &.__button-lg {
+        height: $button-height * 1px * 1.15;
+        line-height: calc((#{$button-height} * 1px - #{$button-borderWidth} * 2px) * 1.15);
+    }
+    &.__button-sm {
+        height: $button-height * 1px * 1.15;
+        line-height: calc((#{$button-height} * 1px - #{$button-borderWidth} * 2px) * 1.15);
+    }
+    &.__button-xs {
+        height: $button-height * 1px * 1.15;
+        line-height: calc((#{$button-height} * 1px - #{$button-borderWidth} * 2px) * 1.15);
+    }
+}
+
+.button-#{$name}.__arrow:after {
+    content: "";
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-right: 1px solid;
+    border-top: 1px solid;
+}

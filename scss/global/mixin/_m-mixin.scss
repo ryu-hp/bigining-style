@@ -1,0 +1,103 @@
+@use "m-breakpoint" as *;
+
+@mixin mq($type, $bp1, $bp2: 0) {
+    @if ($type ==min-width) {
+        $width: map-get($breakpoints, $bp1);
+        $width: $width * 1px;
+
+        @media screen and (min-width: #{$width}) {
+            @content;
+        }
+    } @else if ($type ==max-width) {
+        $width: map-get($breakpoints, $bp1);
+        $width: $width - 1 * 1px;
+
+        @media screen and (max-width: #{$width}) {
+            @content;
+        }
+    }
+}
+
+$min_viewport: map-get($breakpoints, sm); //480
+$max_viewport: map-get($breakpoints, xxl); //1366
+
+@mixin position($direction: column, $justify-content: center, $align-items: center) {
+    display: flex;
+    flex-direction: $direction;
+    justify-content: $justify-content;
+    align-items: $align-items;
+}
+
+@mixin font-gothic() {
+    font-family: "游ゴシック体", "Yu Gothic", YuGothic, "ヒラギノ角ゴ Pro", "Hiragino Kaku Gothic Pro", "メイリオ",
+        Meiryo, "MS Pゴシック", "MS PGothic", sans-serif;
+}
+
+@mixin bold() {
+    font-family: "游ゴシック体", YuGothic, "游ゴシック", "Yu Gothic", sans-serif;
+    font-weight: bold;
+}
+@mixin font-normal() {
+    font-family: "游ゴシック体", YuGothic, "游ゴシック Medium", "Yu Gothic Medium", "游ゴシック", "Yu Gothic",
+        sans-serif;
+    font-weight: normal;
+}
+
+@mixin box_shadow($value: 0px 0px 10px rgba(0, 0, 0, 0.3)) {
+    -webkit-box-shadow: $value;
+    -moz-box-shadow: $value;
+    -ms-box-shadow: $value;
+    box-shadow: $value;
+}
+
+@mixin clearfix {
+    &:after {
+        content: ".";
+        display: block;
+        clear: both;
+        height: 0;
+        visibility: hidden;
+    }
+}
+
+@mixin min($breakpointsBeta) {
+    @media (width >= #{map-get($breakpointsBeta, $breakpoint)}) {
+        @content;
+    }
+}
+@mixin max($breakpointsBeta) {
+    @media (width <= #{map-get($breakpointsBeta, $breakpoint)}) {
+        @content;
+    }
+}
+// @mixin minmax($breakpointsBeta, $breakpointsBeta) {
+//     @media (#{map-get($breakpointsBeta, $breakpoint)} < width <= #{map-get($breakpointsBeta, $breakpoint)}) {
+//         @content;
+//     }
+// }
+
+@mixin text-crop($line-height: 1.25, $adjustment-top: 0em, $adjustment-bottom: 0em) {
+    $crop-top: 0.25;
+    $crop-bottom: 0.25;
+    // $crop-font-size: 36;
+    $crop-line-height: 1.25;
+    $calc-crop-top: max(($crop-top + ($line-height - $crop-line-height) / 2), 0);
+    $calc-crop-bottom: max(($crop-bottom + ($line-height - $crop-line-height) / 2), 0);
+    &::before,
+    &::after {
+        --calc-crop-top: #{$calc-crop-top};
+        --calc-crop-bottom: #{$calc-crop-bottom};
+        content: "";
+        display: block;
+        height: 0;
+        width: 0;
+    }
+
+    &::before {
+        margin-bottom: calc(var(--calc-crop-top) * -1em + #{$adjustment-top});
+    }
+
+    &::after {
+        margin-top: calc(var(--calc-crop-top) * -1em + #{$adjustment-bottom});
+    }
+}

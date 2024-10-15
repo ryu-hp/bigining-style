@@ -1,0 +1,12 @@
+@use "../global" as *;
+
+.content-404 {
+  max-width: 720px;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  position: absolute;
+  top: calc(50% - 100px);
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

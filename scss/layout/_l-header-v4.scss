@@ -1,0 +1,210 @@
+@use "../global" as *;
+// =========================================================
+//    Header V1
+// =========================================================
+header {
+    @media screen and (min-width: 480px) {
+        position: fixed;
+        width: 100%;
+        z-index: 100;
+        left: 0;
+        // margin-top: 8px;
+        padding-left: 2%;
+        padding-right: 2%;
+    }
+}
+
+section._mv {
+    padding-top: 0px;
+}
+
+.header-menu {
+    display: none;
+}
+
+.intro-header {
+    display: flex;
+    // justify-content: space-between;
+    justify-content: center;
+    align-items: center;
+    // max-width: $HeaderMenuWidth * 1px;
+    margin: 0 auto;
+    z-index: 2;
+    .header-logo {
+        min-height: 42px;
+        // height: 80px;
+        // background-color: #9d2235;
+
+        .header-icon {
+            width: $logoWidthSP * 1px;
+            margin: 0 auto;
+            padding: 10px;
+            @media screen and (min-width: 768px) {
+                width: $logoWidthPC * 1px;
+            }
+            img {
+                max-height: 60px;
+                filter: drop-shadow(0 0 4px #0005) drop-shadow(0 0 10px #0005);
+            }
+        }
+    }
+}
+header {
+    z-index: 1050;
+    width: 100%;
+    @include mq(min-width, sm) {
+        width: 100%;
+        z-index: 100;
+        left: 0;
+    }
+
+    @include mq(min-width, lg) {
+        max-width: ($logoWidthPC) * 1rem + $paddingBase * 1rem;
+        margin: 0 $marginBase * 1rem $marginBase * 1rem;
+    }
+
+    .intro-header {
+        display: flex;
+        background-color: #fff;
+        justify-content: center;
+        align-items: center;
+        max-width: $HeaderMenuWidth * 1px;
+        margin: 0 auto;
+        z-index: 2;
+        @include mq(min-width, lg) {
+            align-items: flex-start;
+            padding: $paddingBase * 0.25rem;
+            box-shadow: 0 3px ($marginBase * 2em) ($marginBase * 0.4em) #0002;
+            border-radius: 0 0 10px 10px;
+        }
+        .header-logo {
+            min-height: 42px;
+            .header-icon {
+                width: $logoWidthSP * 1rem;
+                margin: 0 auto;
+                padding: $paddingBase * 0.25rem;
+                @media screen and (min-width: 768px) {
+                    width: $logoWidthPC * 1rem;
+                }
+            }
+        }
+    }
+}
+
+.menu {
+    // position: relative;
+    // width: 36px;
+    // height: 36px;
+    .header-pc-menu {
+        .menu-item {
+            a:hover {
+                transform: translateX(4px);
+            }
+        }
+    }
+}
+
+.menu {
+    &.__hamburger {
+        .menu-line {
+            width: 24px;
+            height: 2px;
+            border-radius: 10px;
+            position: absolute;
+            background-color: var(--#{$name}_#{color}_#{primary1});
+            right: 0;
+            margin: auto;
+            left: 0;
+            &.__1 {
+                top: 10px;
+            }
+            &.__2 {
+                top: 18px;
+            }
+            &.__3 {
+                top: 26px;
+            }
+        }
+    }
+}
+
+.navbar-design {
+    // background-color: var(--#{$name}_#{color}_#{white});
+    position: absolute;
+    padding: 4px 12px;
+    width: 96vw;
+    min-width: 320px;
+    // max-width: $HeaderMenuWidth * 1px;
+    /* height: 50px; */
+    display: flex;
+    // align-items: stretch;
+    align-items: center;
+    position: relative;
+    // padding: 6px 12px;
+    padding: 0;
+    display: flex;
+    align-items: stretch;
+    justify-content: space-between;
+    margin: auto;
+    // box-shadow: 0 0 12px var(--#{$name}_#{color}_#{shadow});
+    border-radius: 4px;
+    @media screen and (min-width: 480px) and (max-width: 991px) {
+        // justify-content: center;
+        padding-bottom: 0.5em;
+    }
+    @media screen and (min-width: 480px) {
+        margin: 0 auto 0;
+        padding: 10px 12px;
+        // filter: opacity(0.7);
+
+        @media screen and (min-width: 480px) and (max-width: 991px) {
+            padding-bottom: 0.5em;
+        }
+        @include mq(max-width, sm) {
+            margin: 0px auto 0;
+        }
+    }
+}
+
+@include mq(max-width, sm) {
+    .nav-content {
+        display: flex;
+        justify-content: space-between;
+    }
+}
+
+section._mv {
+    padding-top: 0px;
+}
+
+.header-menu {
+    display: none;
+}
+
+.l-main .left-sidemenu {
+    padding-left: ($logoWidthPC + $paddingBase) * 1rem;
+}
+
+.main {
+    max-width: 1680px;
+    @include mq(min-width, sm) {
+        // max-width: 1080px;
+        margin-left: auto;
+        margin-right: auto;
+        border-radius: 12px;
+        padding: 3em;
+        // margin-bottom: 20px;
+        // background: #fff;
+        // box-shadow: 0 0 10px #dddd;
+    }
+    @include mq(max-width, sm) {
+        padding: 0.5em 1.5%;
+        padding-top: 3em;
+    }
+    @include mq(min-width, lg) {
+        width: calc(100% - (($logoWidthPC + $paddingBase + $marginBase) * 1rem));
+        margin-right: 0;
+        margin-left: auto;
+        padding: 0;
+    }
+}

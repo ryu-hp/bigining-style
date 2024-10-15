@@ -1,0 +1,89 @@
+@use "../global" as *;
+// =========================================================
+//    Search v1
+// =========================================================
+
+.s-header-search {
+  display: flex;
+  align-items: center;
+  width: 420px;
+  margin-left: 20px;
+}
+
+.s-header-search .__form {
+  position: relative;
+  z-index: 200;
+  flex: 1 1;
+}
+
+.c-search-form {
+  width: 100%;
+}
+
+.c-search-form-content {
+  display: flex;
+  align-items: center;
+}
+
+.c-search-form-content__icon {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 15px;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.c-search-form-content__icon:before {
+  font-size: 16px;
+  line-height: 1;
+  font-family: sans-serif;
+  color: #2d2d2d;
+  content: "\e918";
+}
+
+.c-search-form-content__input {
+  font-size: 12px;
+  line-height: 30px;
+  box-sizing: border-box;
+  width: 100%;
+  height: 30px;
+  padding: 0 12px 0 38px;
+  background-color: #fff;
+  border: 0;
+  border-radius: 8px;
+  outline: 0;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  box-shadow: 0 0 10px #ddd;
+}
+
+.c-search-form-content__input {
+  font-weight: 600;
+}
+
+.c-search-form__clear {
+  position: absolute;
+  top: 0;
+  right: 10px;
+  bottom: 0;
+  z-index: 1;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  padding: 0;
+  margin: auto 0;
+  cursor: pointer;
+  background-color: rgba(0, 0, 0, 0.2);
+  border: 0;
+  border-radius: 50%;
+  outline: 0;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}

@@ -1,0 +1,71 @@
+@use "../global" as *;
+// =========================================================
+//    Hamburger v1
+// =========================================================
+
+.animated-icon2 {
+    width: 28px;
+    height: 24px;
+    position: relative;
+    margin: 0px;
+    transform: rotate(0deg);
+    transition: 0.5s ease-in-out;
+    cursor: pointer;
+    span {
+        display: block;
+        position: absolute;
+        height: 3px;
+        width: 100%;
+        border-radius: 9px;
+        opacity: 1;
+        left: 0;
+        transform: rotate(0deg);
+        transition: 0.25s ease-in-out;
+        background: #2e81ff;
+        &:nth-child(1) {
+            top: 1px;
+        }
+        &:nth-child(2),
+        &:nth-child(3) {
+            top: 10px;
+        }
+        &:nth-child(4) {
+            top: 19px;
+        }
+    }
+
+    &.open {
+        span:nth-child(1) {
+            top: 11px;
+            width: 0%;
+            left: 50%;
+        }
+        span:nth-child(2) {
+            transform: rotate(45deg);
+        }
+        span:nth-child(3) {
+            transform: rotate(-45deg);
+        }
+        span:nth-child(4) {
+            top: 11px;
+            width: 0%;
+            left: 50%;
+        }
+    }
+}
+
+.navbar-light .navbar-toggler {
+    border-color: transparent;
+    color: transparent;
+}
+.offcanvas-end {
+    top: 60px;
+    /* width: 94vw; */
+    margin: 0 12px;
+    border-radius: 6px;
+    @media screen and (max-width: 479px) {
+        top: 60px;
+        width: 94vw;
+        margin: 0 3vw;
+    }
+}

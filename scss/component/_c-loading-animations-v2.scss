@@ -1,0 +1,157 @@
+@use "../global" as *;
+/*-------------
+    loading..
+-------------*/
+.header-eyecatch-wrap {
+    height: 100%;
+    position: relative;
+}
+
+.download-inner {
+    z-index: 1031;
+    position: absolute;
+}
+
+#loader {
+    display: block;
+    position: fixed;
+    top: calc(50% + 60px);
+    left: 0%;
+    right: 0%;
+    width: 200px;
+    height: 48px;
+    margin-top: -90px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    color: var(--#{$name}_#{color}_#{white});
+    z-index: 2;
+    /* background: #eeeeef; */
+    /* z-index: -1; */
+}
+
+#loader img {
+    background: var(--#{$name}_#{color}_#{white});
+    width: 42px;
+    height: 42px;
+}
+
+:root {
+    --#{$name}_#{color}_#{black}: #222;
+    --#{$name}_#{color}_#{white}: #fff;
+}
+#loader p {
+    color: var(--#{$name}_#{color}_#{black});
+    font-weight: 500;
+    margin-top: 10px;
+    font-size: 1.4rem;
+    letter-spacing: 0;
+}
+
+.loader-wrapper {
+    width: 40px;
+    height: 40px;
+    margin: 0 auto;
+    position: absolute;
+    left: 50%;
+    top: -2.5rem;
+    transform: translate(-50%, -50%);
+}
+
+.loader-1 {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: solid 4px;
+    border-color: #000000 #00000010 #00000010;
+    position: relative;
+    animation-name: spin;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+
+.loader-2 {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: solid 4px;
+    border-color: var(--#{$name}_#{color}_primary1) var(--#{$name}_#{color}_gray3) var(--#{$name}_#{color}_gray3);
+
+    position: relative;
+    animation-name: spin;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+}
+
+.loader-3 {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: solid 4px;
+    border-color: #000000 #00000010;
+    position: relative;
+    animation-name: spin;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+}
+
+.loader-4 {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: dashed 3px;
+    border-color: #00000010 #000000 #000000;
+    position: relative;
+    animation-name: spin;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.loader-5 {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: solid 4px;
+    border-color: #000000 #00000010 #00000010 #00000010;
+    position: relative;
+    animation-name: stagger;
+    animation-duration: 1.5s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-i-out;
+}
+
+.loader-6 {
+    width: 40px;
+    height: 40px;
+    border: solid 4px;
+    border-color: #000000 #00000010 #00000010 #00000010;
+    position: relative;
+    animation-name: stagger;
+    animation-duration: 1.5s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+
+@keyframes stagger {
+    25% {
+        border-color: #00000010 #000000 #00000010 #00000010;
+    }
+
+    50% {
+        border-color: #00000010 #00000010 #000000 #00000010;
+    }
+
+    75% {
+        border-color: #00000010 #00000010 #00000010 #000000;
+    }
+}
